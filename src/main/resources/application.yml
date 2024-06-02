@@ -4,6 +4,7 @@ spring:
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
     driver-class-name: ${DB_DRIVER}
+
   jpa:
     hibernate:
       ddl-auto: update
@@ -13,16 +14,6 @@ spring:
         show_sql: true
         format_sql: true
 
-# Additional settings for better logging and debugging
-#  main:
-#    allow-bean-definition-overriding: true
-#  mvc:
-#    pathmatch:
-#      matching-strategy: ant_path_matcher
-#  sql:
-#    init:
-#      mode: always
-
 logging:
   level:
     root: INFO
@@ -31,3 +22,11 @@ logging:
         SQL: DEBUG
         type: trace
 
+springdoc:
+  default-consumes-media-type: application/json;charset=UTF-8
+  default-produces-media-type: application/json;charset=UTF-8
+  swagger-ui:
+    path: /
+    disable-swagger-default-url: true
+    display-request-duration: true
+    operations-sorter: alpha
