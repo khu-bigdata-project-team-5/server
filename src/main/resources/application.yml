@@ -4,7 +4,6 @@ spring:
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
     driver-class-name: ${DB_DRIVER}
-
   jpa:
     hibernate:
       ddl-auto: update
@@ -13,6 +12,12 @@ spring:
         dialect: org.hibernate.dialect.MySQL8Dialect
         show_sql: true
         format_sql: true
+
+# multipart 파일 용량 늘려주는 부분
+servlet:
+  multipart:
+    max-file-size: 200MB
+    max-request-size: 300MB
 
 logging:
   level:

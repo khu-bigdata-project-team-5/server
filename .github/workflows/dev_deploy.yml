@@ -50,12 +50,23 @@ jobs:
           mkdir -p deploy
           cp build/libs/*.jar deploy/application.jar
           cp Procfile deploy/Procfile
-          cp -r.ebextensions deploy/.ebextensions
+          cp -r .ebextensions_dev deploy/.ebextensions
           cp -r .platform deploy/.platform
           cd deploy && zip -r deploy.zip .
 
+      # AWS Elastic Beanstalk 배포
       - name: BeanStalk Deploy
         uses: einaregilsson/beanstalk-deploy@v20
+        with:
+          aws_access_key: ${{ secrets.AWS_ACTION_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.AWS_ACTION_SECRET_ACCESS_KEY }}
+          region: 'ap-northeast-2'
+          application_name: 'infou-dev'
+          environment_name: 'Infou-dev-env'
+          version_label: github-action-${{ steps.current-time.outputs.formattedTime }}
+          deployment_package: 'deploy/deploy.zip'
+          wait_for_deployment: false
+
 
 
 
