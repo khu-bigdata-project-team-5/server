@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -20,8 +21,8 @@ public class Tag {
 
     private String name;
 
-    @OneToMany(mappedBy = "tags")
-    private List<Lecture> lectureTag;
+    @OneToMany(mappedBy = "tag", cascade = CascadeType.ALL)
+    private List<LectureTag> lectureTagList = new ArrayList<>();
 
     // Getters and Setters
 }

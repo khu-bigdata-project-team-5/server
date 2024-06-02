@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -40,8 +41,8 @@ public class Lecture {
     private String instructorUrl;
     private String thumbnail;
 
-    @OneToMany(mappedBy = "lecture")
-    private List<LectureTag> lectureTags;
+    @OneToMany(mappedBy = "lecture", cascade = CascadeType.ALL)
+    private List<LectureTag> lectureTagList = new ArrayList<>();
 
     // Getters and Setters
 }
