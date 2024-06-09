@@ -28,7 +28,7 @@ public class LectureController {
 
     @GetMapping("/curriculum/recommendation")
     // 설명 시작
-    public ResponseEntity<> getRecommendedLectureByKeyword(
+    public ResponseEntity<LectureResponseDTO.KeywordRecommendLectureDto> getRecommendedLectureByKeyword(
             @RequestParam(name = "keyword") String keyword
     ) {
         return ResponseEntity.ok(lectureService.findRecommendedLectureByKeyword(keyword));
