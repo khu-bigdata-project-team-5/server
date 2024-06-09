@@ -13,23 +13,25 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @Slf4j
-@RequestMapping("/api/lectures")
+@RequestMapping("/api")
 public class LectureController {
 
     private final LectureService lectureService;
 
-    @GetMapping("/categories")
-    public ResponseEntity<LectureResponseDTO.CategoryRecommandLectureDto> getRecommendedLecture(
+    @GetMapping("/lectures/categories")
+    public ResponseEntity<LectureResponseDTO.CategoryRecommendLectureDto> getRecommendedLectureByCategory(
             @RequestParam(name = "category") String category
     ) {
         return ResponseEntity.ok(lectureService.findRecommendedLectureByCategory(category));
     }
 
-    /**
-     *
-     */
 
+    @GetMapping("/curriculum/recommendation")
     // 설명 시작
-    public ResponseEntity<????????????>
+    public ResponseEntity<> getRecommendedLectureByKeyword(
+            @RequestParam(name = "keyword") String keyword
+    ) {
+        return ResponseEntity.ok(lectureService.findRecommendedLectureByKeyword(keyword));
+    }
 
 }
