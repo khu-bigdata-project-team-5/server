@@ -10,5 +10,5 @@ public interface LectureDetailRepository extends JpaRepository<LectureDetail, Lo
 
     Optional<LectureDetail> findByLectureUdemy(LectureUdemy lectureUdemy);
 
-    Optional<LectureDetail> findByLectureId(Integer lectureId);
+    Optional<LectureDetail> findByLectureId(Long lectureId);
 }
