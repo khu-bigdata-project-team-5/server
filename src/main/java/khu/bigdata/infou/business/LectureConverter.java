@@ -17,9 +17,9 @@ public class LectureConverter {
                 .price(lectureUdemy.getPrice())
                 .avgRating(lectureUdemy.getAvgRating())
                 .thumbnail(lectureUdemy.getThumbnail())
+                .instructorName(lectureUdemy.getInstructorName())
                 .topword1(lectureUdemy.getTopic())
                 .topword2(lectureUdemy.getSubcategory())
-                .topword3(lectureUdemy.getCategory())
                 .build();
     }
 
@@ -42,9 +42,9 @@ public class LectureConverter {
                 .price(lectureUdemy.getPrice())
                 .avgRating(lectureUdemy.getAvgRating())
                 .thumbnail(lectureUdemy.getThumbnail())
+                .instructorName(lectureUdemy.getInstructorName())
                 .topword1(lectureUdemy.getTopic())
                 .topword2(lectureUdemy.getSubcategory())
-                .topword3(lectureUdemy.getCategory())
                 .build();
     }
 

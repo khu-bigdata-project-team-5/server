@@ -22,10 +22,10 @@ public class LectureResponseDTO {
         private String thumbnail;
         private String title;
         private float price;
+        private String instructorName;
 
         private String topword1;
         private String topword2;
-        private String topword3;
 
     }
 
@@ -51,10 +51,10 @@ public class LectureResponseDTO {
         private String thumbnail;
         private String title;
         private float price;
+        private String instructorName;
 
         private String topword1;
         private String topword2;
-        private String topword3;
     }
 
 
