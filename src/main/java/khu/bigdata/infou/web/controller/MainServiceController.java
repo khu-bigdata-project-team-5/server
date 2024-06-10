@@ -58,12 +58,4 @@ public class MainServiceController {
     ) {
         return ResponseEntity.ok(lectureService.findOtherLectureList());
     }
-
-    @GetMapping("/others/{userId}")
-    @Operation(summary = "특정 수강생의 topword 조회 API", description = "유저로부터 입력받은 키워드 4개를 입력받습니다.")
-    public ResponseEntity<LectureResponseDTO.StudentTopwordDto> getStudentTopword(
-            @PathVariable(name = "userId") Integer userId
-    ) {
-        return ResponseEntity.ok(lectureService.findStudentTopword());
-    }
 }
