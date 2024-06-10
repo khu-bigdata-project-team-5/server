@@ -1,6 +1,7 @@
 package khu.bigdata.infou.implement;
 
 import khu.bigdata.infou.business.LectureConverter;
+import khu.bigdata.infou.domain.LectureDetail;
 import khu.bigdata.infou.domain.LectureUdemy;
 import khu.bigdata.infou.repository.LectureDetailRepository;
 import khu.bigdata.infou.repository.LectureInflearnRepository;
@@ -60,8 +61,20 @@ public class LectureService {
         return LectureConverter.toKeywordRecommendLectureDto(sortedList);
     }
 
-    public LectureResponseDTO.LectureDetailDto findLectureDetail() {
-        return null;
+    // 강좌 세부 조회
+    public LectureResponseDTO.LectureDetailDto findLectureDetail(Integer lectureId) {
+
+        // lectureId가 null인 경우에 대한 예외 처리
+        if (lectureId == null) {
+            throw new IllegalArgumentException("LectureId must not be null");
+        }
+
+        LectureUdemy lectureUdemy = lectureUdemyRepository.findById(lectureId)
+                .orElseThrow(() -> new IllegalArgumentException("Lecture not found"));
+        LectureDetail lectureDetail = lectureDetailRepository.findByLectureUdemy(lectureUdemy)
+                .orElseThrow(() -> new IllegalArgumentException("Lecture detail not found"));
+
+        return LectureConverter.toLectureDetailDto(lectureUdemy, lectureDetail);
     }
 
     public LectureResponseDTO.OtherStudentsDto findOtherStudents() {

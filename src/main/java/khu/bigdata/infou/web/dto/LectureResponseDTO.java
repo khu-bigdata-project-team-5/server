@@ -73,6 +73,7 @@ public class LectureResponseDTO {
     @AllArgsConstructor
     public static class LectureDetailDto {
 
+        private int lectureId;
         private float avgRating;
         private String thumbnail;
         private String title;

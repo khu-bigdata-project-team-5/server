@@ -39,11 +39,11 @@ public class MainServiceController {
     public ResponseEntity<LectureResponseDTO.LectureDetailDto> getLectureDetail(
             @PathVariable(name = "lectureId") Integer lectureId
     ) {
-        return ResponseEntity.ok(lectureService.findLectureDetail());
+        return ResponseEntity.ok(lectureService.findLectureDetail(lectureId));
     }
 
     /**
-     * Todo
+     * TODO
      */
     @GetMapping("/others")
     @Operation(summary = "다른 수강생들의 커리큘럼 전체 조회 API")

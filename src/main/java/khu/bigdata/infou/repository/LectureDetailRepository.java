@@ -9,4 +9,6 @@ import java.util.Optional;
 public interface LectureDetailRepository extends JpaRepository<LectureDetail, Long> {
 
     Optional<LectureDetail> findByLectureUdemy(LectureUdemy lectureUdemy);
+
+    Optional<LectureDetail> findByLectureId(Integer lectureId);
 }
