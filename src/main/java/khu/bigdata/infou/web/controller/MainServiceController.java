@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @Slf4j
 @RequestMapping("/api")
-public class MainController {
+public class MainServiceController {
 
     private final LectureService lectureService;
 
@@ -26,7 +26,7 @@ public class MainController {
 
 
     @GetMapping("/curriculum/recommendation")
-    @Operation(summary = "선택된 키워드별 추천 강좌 조회 API", description = "유저로부터 입력받은 키워드 4개를 입력받습니다.")
+    @Operation(summary = "선택된 키워드별 추천 강좌 조회 API", description = "유저로부터 입력받은 키워드와 일치하는 강좌를 조회합니다.")
     public ResponseEntity<LectureResponseDTO.KeywordRecommendLectureDto> getRecommendedLectureByKeyword(
             @RequestParam(name = "keyword") String keyword
     ) {
