@@ -1,5 +1,6 @@
 package khu.bigdata.infou.business;
 
+import khu.bigdata.infou.domain.LectureDetail;
 import khu.bigdata.infou.domain.LectureUdemy;
 import khu.bigdata.infou.web.dto.LectureResponseDTO;
 
@@ -59,4 +60,26 @@ public class LectureConverter {
                 .build();
     }
 
+    // 강좌 세부 조회
+    public static LectureResponseDTO.LectureDetailDto toLectureDetailDto(LectureUdemy lectureUdemy, LectureDetail lectureDetail) {
+
+        return LectureResponseDTO.LectureDetailDto.builder()
+                .lectureId(lectureUdemy.getLectureId())
+                .title(lectureUdemy.getTitle())
+                .price(lectureUdemy.getPrice())
+                .avgRating(lectureUdemy.getAvgRating())
+                .thumbnail(lectureUdemy.getThumbnail())
+                .instructorName(lectureUdemy.getInstructorName())
+                .category(lectureUdemy.getCategory())
+                .subcategory(lectureUdemy.getSubcategory())
+                .good(lectureDetail.getGood())
+                .bad(lectureDetail.getBad())
+                .teaching_quality(lectureDetail.getTeachingQuality())
+                .reference(lectureDetail.getReference())
+                .practice(lectureDetail.getPractice())
+                .rating(lectureDetail.getRating())
+                .level(lectureDetail.getLevel())
+                .topword(lectureUdemy.getTopic())
+                .build();
+    }
 }
