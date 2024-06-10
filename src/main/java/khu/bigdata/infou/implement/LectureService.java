@@ -2,6 +2,7 @@ package khu.bigdata.infou.implement;
 
 import khu.bigdata.infou.business.LectureConverter;
 import khu.bigdata.infou.domain.LectureUdemy;
+import khu.bigdata.infou.repository.LectureDetailRepository;
 import khu.bigdata.infou.repository.LectureInflearnRepository;
 import khu.bigdata.infou.repository.LectureUdemyRepository;
 import khu.bigdata.infou.web.dto.LectureResponseDTO;
@@ -20,9 +21,10 @@ public class LectureService {
 
     private final LectureInflearnRepository lectureInflearnRepository;
     private final LectureUdemyRepository lectureUdemyRepository;
+    private final LectureDetailRepository lectureDetailRepository;
 
 
-    // 메인페이지 카테고리별 추천 강좌 조회
+    // 카테고리별 추천 강좌 조회
     public LectureResponseDTO.CategoryRecommendLectureDto findRecommendedLectureByCategory(String category) {
 
         if (category == null) {
@@ -33,7 +35,7 @@ public class LectureService {
 
         // 일단 가져오고 상위 값 추출
         List<LectureUdemy> sortedList = lectureUdemyList.stream()
-                .sorted(Comparator.comparingDouble(lecture -> lecture.getAvgRating() * lecture.getNumReviews()))
+                .sorted(Comparator.comparingDouble((LectureUdemy lecture) -> lecture.getAvgRating() * lecture.getNumReviews()).reversed())
                 .collect(Collectors.toList());
 
         return LectureConverter.toCategoryRecommendLectureDto(sortedList);
@@ -46,12 +48,12 @@ public class LectureService {
             throw new IllegalArgumentException("Keyword must not be null or empty");
         }
 
-        // 키워드를 포함하는 강의 목록을 조회
-        List<LectureUdemy> lectureUdemyList = lectureUdemyRepository.findAllByTitleContaining(keyword);
+        // 키워드를 포함하는 강의 목록을 조회(topic 데이터에 있는지 확인)
+        List<LectureUdemy> lectureUdemyList = lectureUdemyRepository.findAllByTopic(keyword);
 
         // 조회된 강의 목록을 AvgRating과 NumReviews의 값을 곱한 값으로 내림차순 정렬
         List<LectureUdemy> sortedList = lectureUdemyList.stream()
-                .sorted(Comparator.comparingDouble(lecture -> lecture.getAvgRating() * lecture.getNumReviews()))
+                .sorted(Comparator.comparingDouble((LectureUdemy lecture) -> lecture.getAvgRating() * lecture.getNumReviews()).reversed())
                 .collect(Collectors.toList());
 
         // 조회된 강의 목록을 DTO로 변환하여 반환

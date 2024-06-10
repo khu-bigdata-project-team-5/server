@@ -1,6 +1,5 @@
 package khu.bigdata.infou.business;
 
-import khu.bigdata.infou.domain.LectureTag;
 import khu.bigdata.infou.domain.LectureUdemy;
 import khu.bigdata.infou.web.dto.LectureResponseDTO;
 
@@ -12,19 +11,15 @@ public class LectureConverter {
 
     public static LectureResponseDTO.CategoryRecommendLectureInfo toCategoryRecommendLectureInfo(LectureUdemy lectureUdemy) {
 
-        LectureTag lectureTag = lectureUdemy.getLectureTag();
-
         return LectureResponseDTO.CategoryRecommendLectureInfo.builder()
                 .lectureId(lectureUdemy.getLectureId())
                 .title(lectureUdemy.getTitle())
                 .price(lectureUdemy.getPrice())
                 .avgRating(lectureUdemy.getAvgRating())
                 .thumbnail(lectureUdemy.getThumbnail())
-                .topword1(lectureTag.getTopword1())
-                .topword2(lectureTag.getTopword2())
-                .topword3(lectureTag.getTopword3())
-                .topword4(lectureTag.getTopword4())
-                .topword5(lectureTag.getTopword5())
+                .topword1(lectureUdemy.getTopic())
+                .topword2(lectureUdemy.getSubcategory())
+                .topword3(lectureUdemy.getCategory())
                 .build();
     }
 
@@ -40,7 +35,6 @@ public class LectureConverter {
 
     // 키워드별 추천 강좌 조회
     public static LectureResponseDTO.KeywordRecommendLectureInfo toKeywordRecommendLectureInfo(LectureUdemy lectureUdemy) {
-        LectureTag lectureTag = lectureUdemy.getLectureTag();
 
         return LectureResponseDTO.KeywordRecommendLectureInfo.builder()
                 .lectureId(lectureUdemy.getLectureId())
@@ -48,11 +42,9 @@ public class LectureConverter {
                 .price(lectureUdemy.getPrice())
                 .avgRating(lectureUdemy.getAvgRating())
                 .thumbnail(lectureUdemy.getThumbnail())
-                .topword1(lectureTag.getTopword1())
-                .topword2(lectureTag.getTopword2())
-                .topword3(lectureTag.getTopword3())
-                .topword4(lectureTag.getTopword4())
-                .topword5(lectureTag.getTopword5())
+                .topword1(lectureUdemy.getTopic())
+                .topword2(lectureUdemy.getSubcategory())
+                .topword3(lectureUdemy.getCategory())
                 .build();
     }
 

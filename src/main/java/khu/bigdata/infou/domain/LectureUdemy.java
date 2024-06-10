@@ -66,7 +66,7 @@ public class LectureUdemy {
     @Column(name = "course_url", columnDefinition = "TEXT")
     private String courseUrl;
 
-    @Column(name = "instructor_name", length = 50)
+    @Column(name = "instructor_name")
     private String instructorName;
 
     @Column(name = "thumbnail", columnDefinition = "TEXT")

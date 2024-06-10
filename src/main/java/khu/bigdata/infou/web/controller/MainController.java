@@ -17,7 +17,7 @@ public class MainController {
     private final LectureService lectureService;
 
     @GetMapping("/lectures/categories")
-    @Operation(summary = "카테고리별 추천 강좌 조회 API", description = "카테고리: 프로그래밍 언어, 웹 개발, 게임 개발, 모바일 앱 개발, 데이터 사이언스, 인공지능")
+    @Operation(summary = "카테고리별 추천 강좌 조회 API", description = "카테고리: Programming Languages, Web Development, Game Development, Mobile Development, Data Science")
     public ResponseEntity<LectureResponseDTO.CategoryRecommendLectureDto> getRecommendedLectureByCategory(
             @RequestParam(name = "category") String category
     ) {
@@ -42,6 +42,9 @@ public class MainController {
         return ResponseEntity.ok(lectureService.findLectureDetail());
     }
 
+    /**
+     * Todo
+     */
     @GetMapping("/others")
     @Operation(summary = "다른 수강생들의 커리큘럼 전체 조회 API")
     public ResponseEntity<LectureResponseDTO.OtherStudentsDto> getOtherStudents() {
