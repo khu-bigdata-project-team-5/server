@@ -4,8 +4,6 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 
-import java.util.Date;
-
 @Entity
 @Getter
 @Builder
@@ -53,13 +51,13 @@ public class LectureUdemy {
     @Column(name = "content_length_min")
     private float contentLengthMin;
 
-    @Column(name = "category", length = 255)
+    @Column(name = "category")
     private String category;
 
-    @Column(name = "subcategory", length = 50)
+    @Column(name = "subcategory")
     private String subcategory;
 
-    @Column(name = "topic", length = 50)
+    @Column(name = "topic")
     private String topic;
 
     @Column(name = "language", length = 20)
@@ -71,19 +69,8 @@ public class LectureUdemy {
     @Column(name = "instructor_name", length = 50)
     private String instructorName;
 
-    @Column(name = "instructor_url", columnDefinition = "TEXT")
-    private String instructorUrl;
-
     @Column(name = "thumbnail", columnDefinition = "TEXT")
     private String thumbnail;
-
-    @Column(name = "published_time")
-    @Temporal(TemporalType.DATE)
-    private Date publishedTime;
-
-    @Column(name = "last_update_date")
-    @Temporal(TemporalType.DATE)
-    private Date lastUpdateDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
     private PlatformStudentLecture platformStudentLecture;
