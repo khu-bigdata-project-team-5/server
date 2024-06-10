@@ -99,10 +99,11 @@ public class LectureResponseDTO {
     @AllArgsConstructor
     public static class OtherStudentsDto {
 
+        private String userId;
         private String name;
-        private String category;
-        private String subcategory;
-        private String topic;
+        private String topword1;
+        private String topword2;
+        private String topword3;
 
     }
 
@@ -111,17 +112,6 @@ public class LectureResponseDTO {
     @NoArgsConstructor
     @AllArgsConstructor
     public static class OtherLectureListDto {
-
-        private String category;
-        private String subcategory;
-        private String topic;
-    }
-
-    @Builder
-    @Getter
-    @NoArgsConstructor
-    @AllArgsConstructor
-    public static class StudentTopwordDto {
 
         private String category;
         private String subcategory;
