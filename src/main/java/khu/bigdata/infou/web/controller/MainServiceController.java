@@ -17,7 +17,7 @@ public class MainServiceController {
     private final LectureService lectureService;
 
     @GetMapping("/lectures/categories")
-    @Operation(summary = "카테고리별 추천 강좌 조회 API", description = "카테고리: Programming Languages, Web Development, Game Development, Mobile Development, Data Science")
+    @Operation(summary = "카테고리별 추천 강좌 조회 API", description = "카테고리: Programming Language, Web Development, Game Development, Mobile Development, Data Science")
     public ResponseEntity<LectureResponseDTO.CategoryRecommendLectureDto> getRecommendedLectureByCategory(
             @RequestParam(name = "category") String category
     ) {
