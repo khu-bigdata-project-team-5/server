@@ -69,9 +69,9 @@ public class LectureService {
             throw new IllegalArgumentException("LectureId must not be null");
         }
 
-        LectureUdemy lectureUdemy = lectureUdemyRepository.findById(lectureId)
+        LectureUdemy lectureUdemy = lectureUdemyRepository.findByLectureId(Long.valueOf(lectureId))
                 .orElseThrow(() -> new IllegalArgumentException("Lecture not found"));
-        LectureDetail lectureDetail = lectureDetailRepository.findByLectureUdemy(lectureUdemy)
+        LectureDetail lectureDetail = lectureDetailRepository.findByLectureId(Long.valueOf(lectureId))
                 .orElseThrow(() -> new IllegalArgumentException("Lecture detail not found"));
 
         return LectureConverter.toLectureDetailDto(lectureUdemy, lectureDetail);
@@ -85,8 +85,4 @@ public class LectureService {
         return null;
     }
 
-
-    public LectureResponseDTO.StudentTopwordDto findStudentTopword() {
-        return null;
-    }
 }
