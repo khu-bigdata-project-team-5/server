@@ -77,6 +77,8 @@ public class LectureResponseDTO {
         private String thumbnail;
         private String title;
         private float price;
+        private String instructorName;
+
         private Integer good;
         private Integer bad;
         private float teaching_quality;
@@ -86,8 +88,8 @@ public class LectureResponseDTO {
         private float level;
         private String category;
         private String subcategory;
-        private String topic;
 
+        private String topword;
     }
 
     @Builder
