@@ -1,12 +1,13 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/infou_db?serverTimezone=UTC&characterEncoding=UTF-8
+    url: jdbc:mysql://infou-db.c1egg6qaq55v.ap-northeast-2.rds.amazonaws.com:3306/infou_db?serverTimezone=UTC&characterEncoding=UTF-8
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
       ddl-auto: update
+    #      ddl-auto: none
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQL8Dialect

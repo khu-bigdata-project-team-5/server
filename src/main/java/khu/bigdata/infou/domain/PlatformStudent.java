@@ -1,6 +1,7 @@
 package khu.bigdata.infou.domain;
 
 import jakarta.persistence.*;
+import khu.bigdata.infou.domain.enums.UserType;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 
@@ -10,18 +11,18 @@ import org.hibernate.annotations.DynamicInsert;
 @DynamicInsert
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)  // 생성 로직 규정
-@Table(name = "lecture_tag")
-public class LectureTag {
+@Table(name = "platform_student")
+public class PlatformStudent {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "lecture_udemy_id", nullable = false)
-    private Integer lectureUdemyId;
+    @Column(name = "user_id", nullable = false)
+    private Integer userId;
 
-    @Column(name = "lecture_inflearn_id", nullable = false)
-    private Integer lectureInflearnId;
+    @Column(name = "name", length = 30, nullable = false)
+    private String name;
 
     @Column(name = "topword1", length = 20)
     private String topword1;
@@ -38,9 +39,7 @@ public class LectureTag {
     @Column(name = "topword5", length = 20)
     private String topword5;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    private LectureInflearn lectureInflearn;
-
-    @OneToOne(fetch = FetchType.LAZY)
-    private LectureUdemy lectureUdemy;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "user_type", nullable = false)
+    private UserType userType;
 }
