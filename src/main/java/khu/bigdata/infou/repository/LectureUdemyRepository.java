@@ -8,4 +8,6 @@ import java.util.List;
 public interface LectureUdemyRepository extends JpaRepository<LectureUdemy, Long> {
 
     public List<LectureUdemy> findAllBySubcategory(String subcategory);
+
+    public List<LectureUdemy> findAllByTitleContaining(String keyword);
 }
