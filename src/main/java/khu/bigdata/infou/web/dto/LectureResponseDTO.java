@@ -111,11 +111,33 @@ public class LectureResponseDTO {
     @Getter
     @NoArgsConstructor
     @AllArgsConstructor
+    public static class OtherLectureListInfo {
+
+        private int lectureId;
+        private float avgRating;
+        private String thumbnail;
+        private String title;
+        private float price;
+        private String instructorName;
+
+        private String topword1;
+        private String topword2;
+        private String topword3;
+    }
+
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
     public static class OtherLectureListDto {
 
-        private String category;
-        private String subcategory;
-        private String topic;
+        private String userId;
+        private String name;
+        private String topword1;
+        private String topword2;
+        private String topword3;
+
+        private List<OtherLectureListInfo> lectureList;
     }
 
 
