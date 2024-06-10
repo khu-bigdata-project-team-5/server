@@ -1,6 +1,6 @@
 package khu.bigdata.infou.business;
 
-import khu.bigdata.infou.domain.LectureTag;
+import khu.bigdata.infou.domain.LectureDetail;
 import khu.bigdata.infou.domain.LectureUdemy;
 import khu.bigdata.infou.web.dto.LectureResponseDTO;
 
@@ -12,19 +12,15 @@ public class LectureConverter {
 
     public static LectureResponseDTO.CategoryRecommendLectureInfo toCategoryRecommendLectureInfo(LectureUdemy lectureUdemy) {
 
-        LectureTag lectureTag = lectureUdemy.getLectureTag();
-
         return LectureResponseDTO.CategoryRecommendLectureInfo.builder()
                 .lectureId(lectureUdemy.getLectureId())
                 .title(lectureUdemy.getTitle())
                 .price(lectureUdemy.getPrice())
                 .avgRating(lectureUdemy.getAvgRating())
                 .thumbnail(lectureUdemy.getThumbnail())
-                .topword1(lectureTag.getTopword1())
-                .topword2(lectureTag.getTopword2())
-                .topword3(lectureTag.getTopword3())
-                .topword4(lectureTag.getTopword4())
-                .topword5(lectureTag.getTopword5())
+                .instructorName(lectureUdemy.getInstructorName())
+                .topword1(lectureUdemy.getTopic())
+                .topword2(lectureUdemy.getSubcategory())
                 .build();
     }
 
@@ -40,7 +36,6 @@ public class LectureConverter {
 
     // 키워드별 추천 강좌 조회
     public static LectureResponseDTO.KeywordRecommendLectureInfo toKeywordRecommendLectureInfo(LectureUdemy lectureUdemy) {
-        LectureTag lectureTag = lectureUdemy.getLectureTag();
 
         return LectureResponseDTO.KeywordRecommendLectureInfo.builder()
                 .lectureId(lectureUdemy.getLectureId())
@@ -48,11 +43,9 @@ public class LectureConverter {
                 .price(lectureUdemy.getPrice())
                 .avgRating(lectureUdemy.getAvgRating())
                 .thumbnail(lectureUdemy.getThumbnail())
-                .topword1(lectureTag.getTopword1())
-                .topword2(lectureTag.getTopword2())
-                .topword3(lectureTag.getTopword3())
-                .topword4(lectureTag.getTopword4())
-                .topword5(lectureTag.getTopword5())
+                .instructorName(lectureUdemy.getInstructorName())
+                .topword1(lectureUdemy.getTopic())
+                .topword2(lectureUdemy.getSubcategory())
                 .build();
     }
 
@@ -67,4 +60,26 @@ public class LectureConverter {
                 .build();
     }
 
+    // 강좌 세부 조회
+    public static LectureResponseDTO.LectureDetailDto toLectureDetailDto(LectureUdemy lectureUdemy, LectureDetail lectureDetail) {
+
+        return LectureResponseDTO.LectureDetailDto.builder()
+                .lectureId(lectureUdemy.getLectureId())
+                .title(lectureUdemy.getTitle())
+                .price(lectureUdemy.getPrice())
+                .avgRating(lectureUdemy.getAvgRating())
+                .thumbnail(lectureUdemy.getThumbnail())
+                .instructorName(lectureUdemy.getInstructorName())
+                .category(lectureUdemy.getCategory())
+                .subcategory(lectureUdemy.getSubcategory())
+                .good(lectureDetail.getGood())
+                .bad(lectureDetail.getBad())
+                .teaching_quality(lectureDetail.getTeachingQuality())
+                .reference(lectureDetail.getReference())
+                .practice(lectureDetail.getPractice())
+                .rating(lectureDetail.getRating())
+                .level(lectureDetail.getLevel())
+                .topword(lectureUdemy.getTopic())
+                .build();
+    }
 }

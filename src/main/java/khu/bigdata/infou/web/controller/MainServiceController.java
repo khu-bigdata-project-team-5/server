@@ -12,12 +12,12 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 @Slf4j
 @RequestMapping("/api")
-public class MainController {
+public class MainServiceController {
 
     private final LectureService lectureService;
 
     @GetMapping("/lectures/categories")
-    @Operation(summary = "카테고리별 추천 강좌 조회 API", description = "카테고리: 프로그래밍 언어, 웹 개발, 게임 개발, 모바일 앱 개발, 데이터 사이언스, 인공지능")
+    @Operation(summary = "카테고리별 추천 강좌 조회 API", description = "카테고리: Programming Language, Web Development, Game Development, Mobile Development, Data Science")
     public ResponseEntity<LectureResponseDTO.CategoryRecommendLectureDto> getRecommendedLectureByCategory(
             @RequestParam(name = "category") String category
     ) {
@@ -26,7 +26,7 @@ public class MainController {
 
 
     @GetMapping("/curriculum/recommendation")
-    @Operation(summary = "선택된 키워드별 추천 강좌 조회 API", description = "유저로부터 입력받은 키워드 4개를 입력받습니다.")
+    @Operation(summary = "선택된 키워드별 추천 강좌 조회 API", description = "유저로부터 입력받은 키워드와 일치하는 강좌를 조회합니다.")
     public ResponseEntity<LectureResponseDTO.KeywordRecommendLectureDto> getRecommendedLectureByKeyword(
             @RequestParam(name = "keyword") String keyword
     ) {
@@ -39,9 +39,12 @@ public class MainController {
     public ResponseEntity<LectureResponseDTO.LectureDetailDto> getLectureDetail(
             @PathVariable(name = "lectureId") Integer lectureId
     ) {
-        return ResponseEntity.ok(lectureService.findLectureDetail());
+        return ResponseEntity.ok(lectureService.findLectureDetail(lectureId));
     }
 
+    /**
+     * TODO
+     */
     @GetMapping("/others")
     @Operation(summary = "다른 수강생들의 커리큘럼 전체 조회 API")
     public ResponseEntity<LectureResponseDTO.OtherStudentsDto> getOtherStudents() {
@@ -54,13 +57,5 @@ public class MainController {
             @PathVariable(name = "userId") Integer userId
     ) {
         return ResponseEntity.ok(lectureService.findOtherLectureList());
-    }
-
-    @GetMapping("/others/{userId}")
-    @Operation(summary = "특정 수강생의 topword 조회 API", description = "유저로부터 입력받은 키워드 4개를 입력받습니다.")
-    public ResponseEntity<LectureResponseDTO.StudentTopwordDto> getStudentTopword(
-            @PathVariable(name = "userId") Integer userId
-    ) {
-        return ResponseEntity.ok(lectureService.findStudentTopword());
     }
 }
