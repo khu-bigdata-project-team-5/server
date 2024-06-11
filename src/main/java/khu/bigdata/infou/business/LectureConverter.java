@@ -79,7 +79,8 @@ public class LectureConverter {
                 .practice(lectureDetail.getPractice())
                 .rating(lectureDetail.getRating())
                 .level(lectureDetail.getLevel())
-                .topword(lectureUdemy.getTopic())
+                .topword1(lectureUdemy.getTopic())
+                .topword2(lectureUdemy.getSubcategory())
                 .build();
     }
 }

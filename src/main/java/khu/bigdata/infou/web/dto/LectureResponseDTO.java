@@ -90,7 +90,8 @@ public class LectureResponseDTO {
         private float rating;
         private float level;
 
-        private String topword;
+        private String topword1; // topic
+        private String topword2; // subcategory
     }
 
     @Builder
@@ -101,9 +102,9 @@ public class LectureResponseDTO {
 
         private String userId;
         private String name;
-        private String topword1;
-        private String topword2;
-        private String topword3;
+        private String topword1;    // topic
+        private String topword2;    // subcategory
+        private String topword3;    // (title + description) 가장 많이 나오는 단어
 
     }
 
@@ -131,13 +132,14 @@ public class LectureResponseDTO {
     @AllArgsConstructor
     public static class OtherLectureListDto {
 
+        // 강의 분석 관련
         private String userId;
         private String name;
         private String topword1;
         private String topword2;
         private String topword3;
 
-        private List<OtherLectureListInfo> lectureList;
+        private List<OtherLectureListInfo> lectureList; // 강의 정보 관련
     }
 
 
