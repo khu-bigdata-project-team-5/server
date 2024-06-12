@@ -3,16 +3,17 @@ package khu.bigdata.infou.implement;
 import khu.bigdata.infou.business.LectureConverter;
 import khu.bigdata.infou.domain.LectureDetail;
 import khu.bigdata.infou.domain.LectureUdemy;
+import khu.bigdata.infou.domain.PlatformStudent;
 import khu.bigdata.infou.repository.LectureDetailRepository;
 import khu.bigdata.infou.repository.LectureInflearnRepository;
 import khu.bigdata.infou.repository.LectureUdemyRepository;
+import khu.bigdata.infou.repository.PlatformStudentRepository;
 import khu.bigdata.infou.web.dto.LectureResponseDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
-import java.util.Comparator;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -20,6 +21,7 @@ import java.util.stream.Collectors;
 @Slf4j
 public class LectureService {
 
+    private final PlatformStudentRepository platformStudentRepository;
     private final LectureInflearnRepository lectureInflearnRepository;
     private final LectureUdemyRepository lectureUdemyRepository;
     private final LectureDetailRepository lectureDetailRepository;
@@ -80,7 +82,30 @@ public class LectureService {
     }
 
     public LectureResponseDTO.OtherStudentsDto findOtherStudents() {
-        return null;
+        // inflearn_user_id의 개수를 세고 내림차순으로 정렬하여 상위 1000개 선택
+        List<Object[]> inflearnUserCounts = platformStudentRepository.countInflearnUserId();
+        List<PlatformStudent> topInflearnStudents = inflearnUserCounts.stream()
+                .limit(1000)
+                .map(obj -> (Long) obj[0])
+                .flatMap(id -> platformStudentRepository.findByInflearnUserId(id).stream())
+                .collect(Collectors.toList());
+
+        // udemy_user_id의 개수를 세고 내림차순으로 정렬하여 상위 1000개 선택
+        List<Object[]> udemyUserCounts = platformStudentRepository.countUdemyUserId();
+        List<PlatformStudent> topUdemyStudents = udemyUserCounts.stream()
+                .limit(1000)
+                .map(obj -> (Long) obj[0])
+                .flatMap(id -> platformStudentRepository.findByUdemyUserId(id).stream())
+                .collect(Collectors.toList());
+
+        // 두 리스트를 합치고 중복을 제거하여 최종 리스트 생성
+        Set<PlatformStudent> topStudentsSet = new HashSet<>();
+        topStudentsSet.addAll(topInflearnStudents);
+        topStudentsSet.addAll(topUdemyStudents);
+
+        List<PlatformStudent> topStudents = new ArrayList<>(topStudentsSet);
+
+        return LectureConverter.toOtherStudentsDto(topStudents);
     }
 
     public LectureResponseDTO.OtherLectureListDto findOtherLectureList() {
