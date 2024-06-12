@@ -73,7 +73,7 @@ public class LectureService {
 
         LectureUdemy lectureUdemy = lectureUdemyRepository.findByLectureId(Long.valueOf(lectureId))
                 .orElseThrow(() -> new IllegalArgumentException("Lecture not found"));
-        LectureDetail lectureDetail = lectureDetailRepository.findByLectureId(Long.valueOf(lectureId))
+        LectureDetail lectureDetail = lectureDetailRepository.findByLectureUdemyId(Long.valueOf(lectureId))
                 .orElseThrow(() -> new IllegalArgumentException("Lecture detail not found"));
 
         return LectureConverter.toLectureDetailDto(lectureUdemy, lectureDetail);
