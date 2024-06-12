@@ -98,14 +98,26 @@ public class LectureResponseDTO {
     @Getter
     @NoArgsConstructor
     @AllArgsConstructor
+    public static class OtherStudentsListInfo {
+
+        private Long inflearnUserId;
+        private Long udemyUserId;
+        private String name;
+
+        private String topword1;
+        private String topword2;
+        private String topword3;
+        private String topword4;
+        private String topword5;
+    }
+
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
     public static class OtherStudentsDto {
 
-        private String userId;
-        private String name;
-        private String topword1;    // topic
-        private String topword2;    // subcategory
-        private String topword3;    // (title + description) 가장 많이 나오는 단어
-
+        List<OtherStudentsListInfo> lectureList;
     }
 
     @Builder

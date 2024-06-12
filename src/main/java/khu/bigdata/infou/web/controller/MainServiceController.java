@@ -42,11 +42,8 @@ public class MainServiceController {
         return ResponseEntity.ok(lectureService.findLectureDetail(lectureId));
     }
 
-    /**
-     * TODO
-     */
     @GetMapping("/others")
-    @Operation(summary = "다른 수강생들의 커리큘럼 전체 조회 API")
+    @Operation(summary = "다른 수강생들의 커리큘럼 전체 조회 API", description = "다른 수강생들의 커리큘럼을 조회합니다.")
     public ResponseEntity<LectureResponseDTO.OtherStudentsDto> getOtherStudents() {
         return ResponseEntity.ok(lectureService.findOtherStudents());
     }
