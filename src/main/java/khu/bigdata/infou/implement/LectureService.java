@@ -31,7 +31,9 @@ public class LectureService {
     private final LectureDetailRepository lectureDetailRepository;
 
 
-    // 카테고리별 추천 강좌 조회
+    /**
+     * 카테고리별 추천 강좌 조회
+     */
     public LectureResponseDTO.CategoryRecommendLectureDto findRecommendedLectureByCategory(String category) {
 
         if (category == null) {
@@ -49,7 +51,9 @@ public class LectureService {
         return LectureConverter.toCategoryRecommendLectureDto(sortedList);
     }
 
-    // 선택된 키워드별 추천 강좌 조회
+    /**
+     * 선택된 키워드별 추천 강좌 조회
+     */
     public LectureResponseDTO.KeywordRecommendLectureDto findRecommendedLectureByKeyword(String keyword) {
         // 키워드가 null이거나 빈 문자열인 경우에 대한 예외 처리
         if (keyword == null || keyword.trim().isEmpty()) {
@@ -69,7 +73,9 @@ public class LectureService {
         return LectureConverter.toKeywordRecommendLectureDto(sortedList);
     }
 
-    // 강좌 세부 조회
+    /**
+     * 강좌 세부 조회
+     */
     public LectureResponseDTO.LectureDetailDto findLectureDetail(Integer lectureId) {
 
         // lectureId가 null인 경우에 대한 예외 처리
@@ -85,6 +91,9 @@ public class LectureService {
         return LectureConverter.toLectureDetailDto(lectureUdemy, lectureDetail);
     }
 
+    /**
+     * 다른 수강생들의 커리큘럼 전체 조회
+     */
     public LectureResponseDTO.OtherStudentsDto findOtherStudents() {
 
         Pageable pageable = PageRequest.of(0, 1000);
