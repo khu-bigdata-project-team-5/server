@@ -24,8 +24,12 @@ public class LectureResponseDTO {
         private float price;
         private String instructorName;
 
+        // todo: topword1 ~ 5까지 추가 -> lecture_tag 테이블에서 가져오기
         private String topword1;
         private String topword2;
+        private String topword3;
+        private String topword4;
+        private String topword5;
 
     }
 
@@ -53,8 +57,12 @@ public class LectureResponseDTO {
         private float price;
         private String instructorName;
 
+        // todo: topword1 ~ 5까지 추가 -> lecture_tag 테이블에서 가져오기
         private String topword1;
         private String topword2;
+        private String topword3;
+        private String topword4;
+        private String topword5;
     }
 
 
@@ -81,7 +89,6 @@ public class LectureResponseDTO {
         private String instructorName;
         private String category;
         private String subcategory;
-
         private Integer good;
         private Integer bad;
         private float teaching_quality;
@@ -90,8 +97,23 @@ public class LectureResponseDTO {
         private float rating;
         private float level;
 
-        private String topword1; // topic
-        private String topword2; // subcategory
+    }
+
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class OtherStudentsListInfo {
+
+        private Long inflearnUserId;
+        private Long udemyUserId;
+        private String name;
+
+        private String topword1;
+        private String topword2;
+        private String topword3;
+        private String topword4;
+        private String topword5;
     }
 
     @Builder
@@ -100,12 +122,7 @@ public class LectureResponseDTO {
     @AllArgsConstructor
     public static class OtherStudentsDto {
 
-        private String userId;
-        private String name;
-        private String topword1;    // topic
-        private String topword2;    // subcategory
-        private String topword3;    // (title + description) 가장 많이 나오는 단어
-
+        List<OtherStudentsListInfo> studentList;
     }
 
     @Builder
@@ -124,6 +141,8 @@ public class LectureResponseDTO {
         private String topword1;
         private String topword2;
         private String topword3;
+        private String topword4;
+        private String topword5;
     }
 
     @Builder
@@ -132,14 +151,7 @@ public class LectureResponseDTO {
     @AllArgsConstructor
     public static class OtherLectureListDto {
 
-        // 강의 분석 관련
-        private String userId;
-        private String name;
-        private String topword1;
-        private String topword2;
-        private String topword3;
-
-        private List<OtherLectureListInfo> lectureList; // 강의 정보 관련
+        private List<OtherLectureListInfo> otherLectureList; // 강의 정보 관련
     }
 
 

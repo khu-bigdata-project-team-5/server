@@ -2,6 +2,7 @@ package khu.bigdata.infou.business;
 
 import khu.bigdata.infou.domain.LectureDetail;
 import khu.bigdata.infou.domain.LectureUdemy;
+import khu.bigdata.infou.domain.PlatformStudent;
 import khu.bigdata.infou.web.dto.LectureResponseDTO;
 
 import java.util.List;
@@ -79,8 +80,31 @@ public class LectureConverter {
                 .practice(lectureDetail.getPractice())
                 .rating(lectureDetail.getRating())
                 .level(lectureDetail.getLevel())
-                .topword1(lectureUdemy.getTopic())
-                .topword2(lectureUdemy.getSubcategory())
+                .build();
+    }
+
+    public static LectureResponseDTO.OtherStudentsListInfo toOtherStudentInfo(PlatformStudent student) {
+
+        return LectureResponseDTO.OtherStudentsListInfo.builder()
+                .inflearnUserId(Long.valueOf(student.getInflearnUserId()))
+                .udemyUserId(Long.valueOf(student.getUdemyUserId()))
+                .name(student.getName())
+                .topword1(student.getTopword1())
+                .topword2(student.getTopword2())
+                .topword3(student.getTopword3())
+                .topword4(student.getTopword4())
+                .topword5(student.getTopword5())
+                .build();
+    }
+
+    public static LectureResponseDTO.OtherStudentsDto toOtherStudentsDto(List<PlatformStudent> students) {
+
+        List<LectureResponseDTO.OtherStudentsListInfo> studentInfos = students.stream()
+                .map(LectureConverter::toOtherStudentInfo)
+                .collect(Collectors.toList());
+
+        return LectureResponseDTO.OtherStudentsDto.builder()
+                .studentList(studentInfos)
                 .build();
     }
 }

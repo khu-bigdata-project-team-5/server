@@ -1,7 +1,6 @@
 package khu.bigdata.infou.domain;
 
 import jakarta.persistence.*;
-import khu.bigdata.infou.domain.enums.LectureType;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 
@@ -11,16 +10,18 @@ import org.hibernate.annotations.DynamicInsert;
 @DynamicInsert
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)  // 생성 로직 규정
-@Table(name = "lecture_detail", indexes = {
-        @Index(name = "idx_lecture_id", columnList = "lectureId")})
+@Table(name = "lecture_detail")
 public class LectureDetail {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "lecture_id", nullable = false)
-    private Integer lectureId;
+    @Column(name = "lecture_udemy_id", nullable = false)
+    private Integer lectureUdemyId;
+
+    @Column(name = "lecture_inflearn_id", nullable = false)
+    private Integer lectureInflearnId;
 
     @Column(name = "good", nullable = false)
     private Integer good;
@@ -43,13 +44,9 @@ public class LectureDetail {
     @Column(name = "level", nullable = false)
     private Float level;
 
-    @Enumerated(EnumType.STRING)
-    @Column(name = "lecture_type", nullable = false)
-    private LectureType lectureType;
-
-    @OneToOne(fetch = FetchType.LAZY)
-    private LectureInflearn lectureInflearn;
-
-    @OneToOne(fetch = FetchType.LAZY)
-    private LectureUdemy lectureUdemy;
+//    @OneToOne(fetch = FetchType.LAZY)
+//    private LectureInflearn lectureInflearn;
+//
+//    @OneToOne(fetch = FetchType.LAZY)
+//    private LectureUdemy lectureUdemy;
 }

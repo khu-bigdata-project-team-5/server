@@ -5,8 +5,6 @@ import khu.bigdata.infou.domain.enums.UserType;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 
-import java.util.List;
-
 @Entity
 @Getter
 @Builder
@@ -23,14 +21,16 @@ public class PlatformStudentLecture {
     @Column(name = "user_id", nullable = false)
     private Integer userId;
 
+    @Column(name = "lecture_id", nullable = false)
+    private Integer lectureId;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "user_type", nullable = false)
-    private UserType userType;
+    private UserType platForm;
 
-    @OneToMany(mappedBy = "platformStudentLecture")
-    private List<LectureInflearn> lectureInflearnList;
-
-    @OneToMany(mappedBy = "platformStudentLecture")
-    private List<LectureUdemy> lectureUdemyList;
+//    @OneToMany(mappedBy = "platformStudentLecture")
+//    private List<LectureInflearn> lectureInflearnList;
+//
+//    @OneToMany(mappedBy = "platformStudentLecture")
+//    private List<LectureUdemy> lectureUdemyList;
 }
