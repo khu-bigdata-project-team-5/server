@@ -151,16 +151,7 @@ public class LectureResponseDTO {
     @AllArgsConstructor
     public static class OtherLectureListDto {
 
-        // 강의 분석 관련
-        private String userId;
-        private String name;
-        private String topword1;
-        private String topword2;
-        private String topword3;
-        private String topword4;
-        private String topword5;
-
-        private List<OtherLectureListInfo> lectureList; // 강의 정보 관련
+        private List<OtherLectureListInfo> otherLectureList; // 강의 정보 관련
     }
 
 

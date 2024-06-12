@@ -80,8 +80,6 @@ public class LectureConverter {
                 .practice(lectureDetail.getPractice())
                 .rating(lectureDetail.getRating())
                 .level(lectureDetail.getLevel())
-                .topword1(lectureUdemy.getTopic())
-                .topword2(lectureUdemy.getSubcategory())
                 .build();
     }
 
@@ -106,7 +104,7 @@ public class LectureConverter {
                 .collect(Collectors.toList());
 
         return LectureResponseDTO.OtherStudentsDto.builder()
-                .lectureList(studentInfos)
+                .studentList(studentInfos)
                 .build();
     }
 }
