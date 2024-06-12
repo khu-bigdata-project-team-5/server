@@ -7,5 +7,5 @@ import java.util.Optional;
 
 public interface LectureInflearnRepository extends JpaRepository<LectureInflearn, Long> {
 
-    Optional<LectureInflearn> findByLectureId(Long lectureId);
+    Optional<LectureInflearn> findByLectureId(Integer lectureId);
 }

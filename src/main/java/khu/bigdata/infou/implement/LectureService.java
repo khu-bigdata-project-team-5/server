@@ -11,9 +11,13 @@ import khu.bigdata.infou.repository.PlatformStudentRepository;
 import khu.bigdata.infou.web.dto.LectureResponseDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -73,39 +77,38 @@ public class LectureService {
             throw new IllegalArgumentException("LectureId must not be null");
         }
 
-        LectureUdemy lectureUdemy = lectureUdemyRepository.findByLectureId(Long.valueOf(lectureId))
+        LectureUdemy lectureUdemy = lectureUdemyRepository.findByLectureId(lectureId)
                 .orElseThrow(() -> new IllegalArgumentException("Lecture not found"));
-        LectureDetail lectureDetail = lectureDetailRepository.findByLectureUdemyId(Long.valueOf(lectureId))
+        LectureDetail lectureDetail = lectureDetailRepository.findByLectureUdemyId(lectureId)
                 .orElseThrow(() -> new IllegalArgumentException("Lecture detail not found"));
 
         return LectureConverter.toLectureDetailDto(lectureUdemy, lectureDetail);
     }
 
     public LectureResponseDTO.OtherStudentsDto findOtherStudents() {
-        // inflearn_user_id의 개수를 세고 내림차순으로 정렬하여 상위 1000개 선택
-        List<Object[]> inflearnUserCounts = platformStudentRepository.countInflearnUserId();
-        List<PlatformStudent> topInflearnStudents = inflearnUserCounts.stream()
-                .limit(1000)
-                .map(obj -> (Long) obj[0])
-                .flatMap(id -> platformStudentRepository.findByInflearnUserId(id).stream())
-                .collect(Collectors.toList());
 
-        // udemy_user_id의 개수를 세고 내림차순으로 정렬하여 상위 1000개 선택
-        List<Object[]> udemyUserCounts = platformStudentRepository.countUdemyUserId();
-        List<PlatformStudent> topUdemyStudents = udemyUserCounts.stream()
-                .limit(1000)
-                .map(obj -> (Long) obj[0])
-                .flatMap(id -> platformStudentRepository.findByUdemyUserId(id).stream())
-                .collect(Collectors.toList());
+        Pageable pageable = PageRequest.of(0, 1000);
 
-        // 두 리스트를 합치고 중복을 제거하여 최종 리스트 생성
-        Set<PlatformStudent> topStudentsSet = new HashSet<>();
-        topStudentsSet.addAll(topInflearnStudents);
-        topStudentsSet.addAll(topUdemyStudents);
+        // 쿼리 실행
+        List<Object[]> topStudents = platformStudentRepository.findTopStudents(pageable);
 
-        List<PlatformStudent> topStudents = new ArrayList<>(topStudentsSet);
+        // 조회된 데이터를 List로 변환
+        List<PlatformStudent> studentList = new ArrayList<>();
+        for (Object[] result : topStudents) {
+            Integer userId = (Integer) result[0];
+            List<PlatformStudent> students;
+            if (userId != null) {
+                students = platformStudentRepository.findByInflearnUserId(userId);
+                if (students.isEmpty()) {
+                    students = platformStudentRepository.findByUdemyUserId(userId);
+                }
+            } else {
+                students = new ArrayList<>();
+            }
+            studentList.addAll(students);
+        }
 
-        return LectureConverter.toOtherStudentsDto(topStudents);
+        return LectureConverter.toOtherStudentsDto(studentList);
     }
 
     public LectureResponseDTO.OtherLectureListDto findOtherLectureList() {

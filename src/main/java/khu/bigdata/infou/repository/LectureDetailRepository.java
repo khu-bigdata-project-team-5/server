@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface LectureDetailRepository extends JpaRepository<LectureDetail, Long> {
 
-    Optional<LectureDetail> findByLectureUdemyId(Long lectureId);
+    Optional<LectureDetail> findByLectureUdemyId(Integer lectureId);
 
-    Optional<LectureDetail> findByLectureInflearnId(Long lectureId);
+    Optional<LectureDetail> findByLectureInflearnId(Integer lectureId);
 }

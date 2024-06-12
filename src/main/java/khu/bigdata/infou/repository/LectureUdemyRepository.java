@@ -13,6 +13,6 @@ public interface LectureUdemyRepository extends JpaRepository<LectureUdemy, Long
 
     List<LectureUdemy> findAllByTopic(String topic);
 
-    Optional<LectureUdemy> findByLectureId(Long lectureId);
+    Optional<LectureUdemy> findByLectureId(Integer lectureId);
 
 }
