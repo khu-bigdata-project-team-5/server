@@ -20,55 +20,51 @@ public class LectureInflearn {
     @Column(name = "lecture_inflearn_id")
     private int lectureInflearnId;
 
-    @Column(name = "slug", columnDefinition = "TEXT")
-    private String slug;
-
-    @Column(name = "thumbnailUrl", columnDefinition = "TEXT")
-    private String thumbnailUrl;
-
-    @Column(name = "title", columnDefinition = "TEXT")
-    private String title;
-
     @Column(name = "description", columnDefinition = "TEXT")
     private String description;
-
-    @Column(name = "reviewCount")
-    private int reviewCount;
-
-    @Column(name = "studentCount")
-    private int studentCount;
-
-    @Column(name = "likeCount")
-    private int likeCount;
-
-    @Column(name = "star")
-    private float star;
-
-    @Column(name = "isExclusive")
-    private boolean isExclusive;
-
-    @Column(name = "isNew")
-    private boolean isNew;
-
-    @Column(name = "isUpdated")
-    private boolean isUpdated;
-
-    @Column(name = "updatedAt")
-    @Temporal(TemporalType.DATE)
-    private Date updatedAt;
-
-    @Column(name = "publishedAt")
-    @Temporal(TemporalType.DATE)
-    private Date publishedAt;
-
-    @Column(name = "metadata", columnDefinition = "JSON")
-    private String metadata;
 
     @Column(name = "instructor_id")
     private int instructorId;
 
     @Column(name = "instructor_name", length = 50)
     private String instructorName;
+
+    @Column(name = "review_count")
+    private int reviewCount;
+
+    @Column(name = "star")
+    private float star;
+
+    @Column(name = "lecture_id")
+    private int lectureId;
+
+    @Column(name = "level", length = 20)
+    private String level;
+
+    @Column(name = "first_category", length = 255)
+    private String firstCategory;
+
+    @Column(name = "second_category", length = 255)
+    private String secondCategory;
+
+    @Column(name = "skill_tag", length = 255)
+    private String skillTag;
+
+    @Column(name = "price")
+    private int price;
+
+    @Column(name = "student_count")
+    private int studentCount;
+
+    @Column(name = "thumbnail_url", columnDefinition = "TEXT")
+    private String thumbnailUrl;
+
+    @Column(name = "title", columnDefinition = "TEXT")
+    private String title;
+
+    @Column(name = "updated_at")
+    @Temporal(TemporalType.DATE)
+    private Date updatedAt;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "platform_student_lecture_id")
