@@ -16,7 +16,7 @@ public class LectureUdemy {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "lecture_udemy_id")
+    @Column(name = "id")
     private int id;
 
     @Column(name = "lecture_id", nullable = false)
@@ -73,18 +73,18 @@ public class LectureUdemy {
     @Column(name = "thumbnail", columnDefinition = "TEXT")
     private String thumbnail;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    private PlatformStudentLecture platformStudentLecture;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    private PlatformStudentLecture platformStudentLecture;
 
-    @OneToOne(mappedBy = "lectureUdemy")
-    private LectureTag lectureTag;
+//    @OneToOne(mappedBy = "lectureUdemy")
+//    private LectureTag lectureTag;
 
-    public void setPlatformStudentLecture(PlatformStudentLecture platformStudentLecture) {
-        if (this.platformStudentLecture != null) {
-            this.platformStudentLecture.getLectureUdemyList().remove(this);
-        }
-        this.platformStudentLecture = platformStudentLecture;
-    }
+//    public void setPlatformStudentLecture(PlatformStudentLecture platformStudentLecture) {
+//        if (this.platformStudentLecture != null) {
+//            this.platformStudentLecture.getLectureUdemyList().remove(this);
+//        }
+//        this.platformStudentLecture = platformStudentLecture;
+//    }
 
     // getters and setters
 

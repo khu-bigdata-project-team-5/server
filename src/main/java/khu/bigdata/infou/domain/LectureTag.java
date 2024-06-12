@@ -38,9 +38,9 @@ public class LectureTag {
     @Column(name = "topword5", length = 20)
     private String topword5;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    private LectureInflearn lectureInflearn;
-
-    @OneToOne(fetch = FetchType.LAZY)
-    private LectureUdemy lectureUdemy;
+//    @OneToOne(fetch = FetchType.LAZY)
+//    private LectureInflearn lectureInflearn;
+//
+//    @OneToOne(fetch = FetchType.LAZY)
+//    private LectureUdemy lectureUdemy;
 }

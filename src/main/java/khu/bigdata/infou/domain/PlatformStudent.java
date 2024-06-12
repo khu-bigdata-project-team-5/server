@@ -1,7 +1,6 @@
 package khu.bigdata.infou.domain;
 
 import jakarta.persistence.*;
-import khu.bigdata.infou.domain.enums.UserType;
 import lombok.*;
 import org.hibernate.annotations.DynamicInsert;
 
@@ -18,10 +17,13 @@ public class PlatformStudent {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "user_id", nullable = false)
-    private Integer userId;
+    @Column(name = "udemy_user_id", nullable = false)
+    private Integer udemyUserId;
 
-    @Column(name = "name", length = 30, nullable = false)
+    @Column(name = "inflearn_user_id", nullable = false)
+    private Integer inflearnUserId;
+
+    @Column(name = "name", length = 50, nullable = false)
     private String name;
 
     @Column(name = "topword1", length = 20)
@@ -38,8 +40,4 @@ public class PlatformStudent {
 
     @Column(name = "topword5", length = 20)
     private String topword5;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "user_type", nullable = false)
-    private UserType userType;
 }

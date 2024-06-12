@@ -17,8 +17,8 @@ public class LectureInflearn {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "lecture_inflearn_id")
-    private int lectureInflearnId;
+    @Column(name = "id")
+    private int id;
 
     @Column(name = "description", columnDefinition = "TEXT")
     private String description;
@@ -66,17 +66,17 @@ public class LectureInflearn {
     @Temporal(TemporalType.DATE)
     private Date updatedAt;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "platform_student_lecture_id")
-    private PlatformStudentLecture platformStudentLecture;
+//    @ManyToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "platform_student_lecture_id")
+//    private PlatformStudentLecture platformStudentLecture;
 
 
-    public void setPlatformStudentLecture(PlatformStudentLecture platformStudentLecture) {
-        if (this.platformStudentLecture != null) {
-            this.platformStudentLecture.getLectureInflearnList().remove(this);
-        }
-        this.platformStudentLecture = platformStudentLecture;
-    }
+//    public void setPlatformStudentLecture(PlatformStudentLecture platformStudentLecture) {
+//        if (this.platformStudentLecture != null) {
+//            this.platformStudentLecture.getLectureInflearnList().remove(this);
+//        }
+//        this.platformStudentLecture = platformStudentLecture;
+//    }
     // getters and setters
 }
 
