@@ -37,6 +37,7 @@ public class LectureService {
         // 일단 가져오고 상위 값 추출
         List<LectureUdemy> sortedList = lectureUdemyList.stream()
                 .sorted(Comparator.comparingDouble((LectureUdemy lecture) -> lecture.getAvgRating() * lecture.getNumReviews()).reversed())
+                .limit(1000) // 1000개로 제한
                 .collect(Collectors.toList());
 
         return LectureConverter.toCategoryRecommendLectureDto(sortedList);
@@ -55,6 +56,7 @@ public class LectureService {
         // 조회된 강의 목록을 AvgRating과 NumReviews의 값을 곱한 값으로 내림차순 정렬
         List<LectureUdemy> sortedList = lectureUdemyList.stream()
                 .sorted(Comparator.comparingDouble((LectureUdemy lecture) -> lecture.getAvgRating() * lecture.getNumReviews()).reversed())
+                .limit(1000) // 1000개로 제한
                 .collect(Collectors.toList());
 
         // 조회된 강의 목록을 DTO로 변환하여 반환
