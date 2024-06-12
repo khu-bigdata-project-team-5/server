@@ -20,6 +20,9 @@ public class LectureInflearn {
     @Column(name = "id")
     private int id;
 
+    @Column(name = "lecture_id", nullable = false)
+    private int lectureId;
+
     @Column(name = "description", columnDefinition = "TEXT")
     private String description;
 
@@ -34,9 +37,6 @@ public class LectureInflearn {
 
     @Column(name = "star")
     private float star;
-
-    @Column(name = "lecture_id")
-    private int lectureId;
 
     @Column(name = "level", length = 20)
     private String level;

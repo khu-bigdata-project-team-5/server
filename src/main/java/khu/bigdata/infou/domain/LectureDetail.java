@@ -10,8 +10,7 @@ import org.hibernate.annotations.DynamicInsert;
 @DynamicInsert
 @AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PROTECTED)  // 생성 로직 규정
-@Table(name = "lecture_detail", indexes = {
-        @Index(name = "idx_lecture_id", columnList = "lectureUdemyId")})
+@Table(name = "lecture_detail")
 public class LectureDetail {
 
     @Id
