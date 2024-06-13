@@ -1,6 +1,7 @@
 package khu.bigdata.infou.business;
 
 import khu.bigdata.infou.domain.LectureDetail;
+import khu.bigdata.infou.domain.LectureTag;
 import khu.bigdata.infou.domain.LectureUdemy;
 import khu.bigdata.infou.domain.PlatformStudent;
 import khu.bigdata.infou.web.dto.LectureResponseDTO;
@@ -62,7 +63,7 @@ public class LectureConverter {
     }
 
     // 강좌 세부 조회
-    public static LectureResponseDTO.LectureDetailDto toLectureDetailDto(LectureUdemy lectureUdemy, LectureDetail lectureDetail) {
+    public static LectureResponseDTO.LectureDetailDto toLectureDetailDto(LectureUdemy lectureUdemy, LectureDetail lectureDetail, LectureTag lectureTag) {
 
         return LectureResponseDTO.LectureDetailDto.builder()
                 .lectureId(lectureUdemy.getLectureId())
@@ -80,6 +81,11 @@ public class LectureConverter {
                 .practice(lectureDetail.getPractice())
                 .rating(lectureDetail.getRating())
                 .level(lectureDetail.getLevel())
+                .topword1(lectureTag.getTopword1())
+                .topword2(lectureTag.getTopword2())
+                .topword3(lectureTag.getTopword3())
+                .topword4(lectureTag.getTopword4())
+                .topword5(lectureTag.getTopword5())
                 .build();
     }
 
