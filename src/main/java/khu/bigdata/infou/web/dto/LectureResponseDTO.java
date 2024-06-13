@@ -56,7 +56,6 @@ public class LectureResponseDTO {
         private float price;
         private String instructorName;
 
-        // todo: topword1 ~ 5까지 추가 -> lecture_tag 테이블에서 가져오기
         private String topword1;
         private String topword2;
         private String topword3;
