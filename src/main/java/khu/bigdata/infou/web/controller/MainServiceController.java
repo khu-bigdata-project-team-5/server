@@ -55,4 +55,10 @@ public class MainServiceController {
     ) {
         return ResponseEntity.ok(lectureService.findOtherLectureList());
     }
+
+    @GetMapping("/top10")
+    @Operation(summary = "현재 가장 있기 있는 프로그래밍 언어 순위 Top 10")
+    public ResponseEntity<LectureResponseDTO.TopProgrammingLanguageList> getTopProgrammingLanguages() {
+        return ResponseEntity.ok(lectureService.findTopProgrammingLanguages());
+    }
 }
