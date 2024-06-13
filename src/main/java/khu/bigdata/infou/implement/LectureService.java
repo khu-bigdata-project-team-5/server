@@ -134,7 +134,7 @@ public class LectureService {
         return null;
     }
 
-    public LectureResponseDTO.topProgrammingLanguageList findTopProgrammingLanguages() {
+    public LectureResponseDTO.TopProgrammingLanguageList findTopProgrammingLanguages() {
         return null;
     }
 }
