@@ -105,8 +105,8 @@ public class LectureResponseDTO {
     @AllArgsConstructor
     public static class OtherStudentsListInfo {
 
-        private Long inflearnUserId;
-        private Long udemyUserId;
+        private Integer inflearnUserId;
+        private Integer udemyUserId;
         private String name;
 
         private String topword1;
