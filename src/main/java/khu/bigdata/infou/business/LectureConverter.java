@@ -86,8 +86,8 @@ public class LectureConverter {
     public static LectureResponseDTO.OtherStudentsListInfo toOtherStudentInfo(PlatformStudent student) {
 
         return LectureResponseDTO.OtherStudentsListInfo.builder()
-                .inflearnUserId(Long.valueOf(student.getInflearnUserId()))
-                .udemyUserId(Long.valueOf(student.getUdemyUserId()))
+                .inflearnUserId(student.getInflearnUserId() != null ? student.getInflearnUserId() : null)
+                .udemyUserId(student.getUdemyUserId() != null ? student.getUdemyUserId() : null)
                 .name(student.getName())
                 .topword1(student.getTopword1())
                 .topword2(student.getTopword2())
