@@ -79,8 +79,17 @@ public class LectureService {
             throw new IllegalArgumentException("Keyword must not be null or empty");
         }
 
-        // 키워드를 포함하는 강의 목록을 조회(topic 데이터에 있는지 확인)
-        List<LectureUdemy> lectureUdemyList = lectureUdemyRepository.findAllByTopic(keyword);
+        // 키워드를 포함하는 LectureTag 목록 조회
+        List<LectureTag> lectureTags = lectureTagRepository.findByTopword1ContainingOrTopword2ContainingOrTopword3ContainingOrTopword4ContainingOrTopword5Containing(
+                keyword, keyword, keyword, keyword, keyword);
+
+        // LectureTag 목록에서 lectureId 추출
+        List<Integer> lectureIds = lectureTags.stream()
+                .map(LectureTag::getLectureUdemyId)
+                .collect(Collectors.toList());
+
+        // lectureId 목록을 사용하여 LectureUdemy 목록 조회
+        List<LectureUdemy> lectureUdemyList = lectureUdemyRepository.findByLectureIdIn(lectureIds);
 
         // 조회된 강의 목록을 AvgRating과 NumReviews의 값을 곱한 값으로 내림차순 정렬
         List<LectureUdemy> sortedList = lectureUdemyList.stream()
@@ -88,8 +97,8 @@ public class LectureService {
                 .limit(1000) // 1000개로 제한
                 .collect(Collectors.toList());
 
-        // 조회된 강의 목록을 DTO로 변환하여 반환
-        return LectureConverter.toKeywordRecommendLectureDto(sortedList);
+        // 조회된 강의 목록과 대응되는 LectureTag를 매핑하여 DTO로 변환
+        return LectureConverter.toKeywordRecommendLectureDto(sortedList, lectureTags);
     }
 
     /**

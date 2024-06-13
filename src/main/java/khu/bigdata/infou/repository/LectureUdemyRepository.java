@@ -11,7 +11,7 @@ public interface LectureUdemyRepository extends JpaRepository<LectureUdemy, Long
 
     List<LectureUdemy> findAllBySubcategory(String subcategory);
 
-    List<LectureUdemy> findAllByTopic(String topic);
+    List<LectureUdemy> findByLectureIdIn(List<Integer> lectureIdList);
 
     Optional<LectureUdemy> findByLectureId(Integer lectureId);
 

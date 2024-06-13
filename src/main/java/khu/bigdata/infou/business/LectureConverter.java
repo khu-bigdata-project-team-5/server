@@ -7,6 +7,7 @@ import khu.bigdata.infou.domain.PlatformStudent;
 import khu.bigdata.infou.web.dto.LectureResponseDTO;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 public class LectureConverter {
@@ -37,7 +38,7 @@ public class LectureConverter {
 
 
     // 키워드별 추천 강좌 조회
-    public static LectureResponseDTO.KeywordRecommendLectureInfo toKeywordRecommendLectureInfo(LectureUdemy lectureUdemy) {
+    public static LectureResponseDTO.KeywordRecommendLectureInfo toKeywordRecommendLectureInfo(LectureUdemy lectureUdemy, LectureTag lectureTag) {
 
         return LectureResponseDTO.KeywordRecommendLectureInfo.builder()
                 .lectureId(lectureUdemy.getLectureId())
@@ -46,15 +47,28 @@ public class LectureConverter {
                 .avgRating(lectureUdemy.getAvgRating())
                 .thumbnail(lectureUdemy.getThumbnail())
                 .instructorName(lectureUdemy.getInstructorName())
-                .topword1(lectureUdemy.getTopic())
-                .topword2(lectureUdemy.getSubcategory())
+                .topword1(lectureTag.getTopword1())
+                .topword2(lectureTag.getTopword2())
+                .topword3(lectureTag.getTopword3())
+                .topword4(lectureTag.getTopword4())
+                .topword5(lectureTag.getTopword5())
                 .build();
     }
 
-    public static LectureResponseDTO.KeywordRecommendLectureDto toKeywordRecommendLectureDto(List<LectureUdemy> lectureUdemyList) {
+    public static LectureResponseDTO.KeywordRecommendLectureDto toKeywordRecommendLectureDto(
+            List<LectureUdemy> lectureUdemyList, List<LectureTag> lectureTagList) {
+
+        Map<Integer, LectureTag> lectureTagMap = lectureTagList.stream()
+                .collect(Collectors.toMap(LectureTag::getLectureUdemyId, tag -> tag));
 
         List<LectureResponseDTO.KeywordRecommendLectureInfo> lectureInfos = lectureUdemyList.stream()
-                .map(LectureConverter::toKeywordRecommendLectureInfo)
+                .map(lectureUdemy -> {
+                    LectureTag lectureTag = lectureTagMap.get(lectureUdemy.getLectureId());
+                    if (lectureTag == null) {
+                        throw new IllegalArgumentException("Matching LectureTag not found for lectureId: " + lectureUdemy.getLectureId());
+                    }
+                    return toKeywordRecommendLectureInfo(lectureUdemy, lectureTag);
+                })
                 .collect(Collectors.toList());
 
         return LectureResponseDTO.KeywordRecommendLectureDto.builder()
