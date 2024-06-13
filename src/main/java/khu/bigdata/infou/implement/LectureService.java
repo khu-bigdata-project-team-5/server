@@ -2,6 +2,7 @@ package khu.bigdata.infou.implement;
 
 import khu.bigdata.infou.business.LectureConverter;
 import khu.bigdata.infou.domain.LectureDetail;
+import khu.bigdata.infou.domain.LectureInflearn;
 import khu.bigdata.infou.domain.LectureUdemy;
 import khu.bigdata.infou.domain.PlatformStudent;
 import khu.bigdata.infou.repository.LectureDetailRepository;
@@ -11,11 +12,8 @@ import khu.bigdata.infou.repository.PlatformStudentRepository;
 import khu.bigdata.infou.web.dto.LectureResponseDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,10 +35,36 @@ public class LectureService {
     public LectureResponseDTO.CategoryRecommendLectureDto findRecommendedLectureByCategory(String category) {
 
         if (category == null) {
-            // 카테고리 프로그래밍 언어로 고정해서 가져와라
+            // default category(udemy)
             category = "Programming Languages";
         }
+
+        //inflearn 강좌 조회 추가
+
+        // default category(inflearn)
+        String categoryInflearn = "프로그래밍 언어";
+
+        String firstCategory = null;
+        String secondCategory = null;
+
+        categoryInflearn = switch (category) {
+            case "Programming Languages" -> "프로그래밍 언어";
+            case "Web Development" -> "웹 개발";
+            case "Game Development" -> "게임 개발";
+            case "Mobile Development" -> "모바일 개발";
+            case "Data Science" -> "데이터 사이언스";
+            default -> categoryInflearn;
+        };
+
+        String[] parts = categoryInflearn.split(" ");
+        if (parts.length == 2) {
+            firstCategory = parts[0];
+            secondCategory = parts[1];
+        }
+
         List<LectureUdemy> lectureUdemyList = lectureUdemyRepository.findAllBySubcategory(category);
+
+        List<LectureInflearn> lectureInflearnList = lectureInflearnRepository.findAllByFirstCategoryAndSecondCategory(firstCategory, secondCategory);
 
         // 일단 가져오고 상위 값 추출
         List<LectureUdemy> sortedList = lectureUdemyList.stream()
@@ -96,26 +120,12 @@ public class LectureService {
      */
     public LectureResponseDTO.OtherStudentsDto findOtherStudents() {
 
-        Pageable pageable = PageRequest.of(0, 1000);
+        List<PlatformStudent> platformStudents = platformStudentRepository.findAllWithUdemyUserId();
 
-        // 쿼리 실행
-        List<Object[]> topStudents = platformStudentRepository.findTopStudents(pageable);
-
-        // 조회된 데이터를 List로 변환
-        List<PlatformStudent> studentList = new ArrayList<>();
-        for (Object[] result : topStudents) {
-            Integer userId = (Integer) result[0];
-            List<PlatformStudent> students;
-            if (userId != null) {
-                students = platformStudentRepository.findByInflearnUserId(userId);
-                if (students.isEmpty()) {
-                    students = platformStudentRepository.findByUdemyUserId(userId);
-                }
-            } else {
-                students = new ArrayList<>();
-            }
-            studentList.addAll(students);
-        }
+        // 가져온 데이터를 List로 변환
+        List<PlatformStudent> studentList = platformStudents.stream()
+                .limit(1000) // 상위 1000개로 제한
+                .collect(Collectors.toList());
 
         return LectureConverter.toOtherStudentsDto(studentList);
     }
