@@ -154,5 +154,21 @@ public class LectureResponseDTO {
         private List<OtherLectureListInfo> otherLectureList; // 강의 정보 관련
     }
 
+    @Builder
+    @Getter
+    @NoArgsConstructor
+    @AllArgsConstructor
+    public static class TopProgrammingLanguageList {
 
+        private String top1;
+        private String top2;
+        private String top3;
+        private String top4;
+        private String top5;
+        private String top6;
+        private String top7;
+        private String top8;
+        private String top9;
+        private String top10;
+    }
 }
