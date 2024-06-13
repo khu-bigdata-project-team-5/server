@@ -1,14 +1,8 @@
 package khu.bigdata.infou.implement;
 
 import khu.bigdata.infou.business.LectureConverter;
-import khu.bigdata.infou.domain.LectureDetail;
-import khu.bigdata.infou.domain.LectureInflearn;
-import khu.bigdata.infou.domain.LectureUdemy;
-import khu.bigdata.infou.domain.PlatformStudent;
-import khu.bigdata.infou.repository.LectureDetailRepository;
-import khu.bigdata.infou.repository.LectureInflearnRepository;
-import khu.bigdata.infou.repository.LectureUdemyRepository;
-import khu.bigdata.infou.repository.PlatformStudentRepository;
+import khu.bigdata.infou.domain.*;
+import khu.bigdata.infou.repository.*;
 import khu.bigdata.infou.web.dto.LectureResponseDTO;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -27,6 +21,7 @@ public class LectureService {
     private final LectureInflearnRepository lectureInflearnRepository;
     private final LectureUdemyRepository lectureUdemyRepository;
     private final LectureDetailRepository lectureDetailRepository;
+    private final LectureTagRepository lectureTagRepository;
 
 
     /**
@@ -111,8 +106,10 @@ public class LectureService {
                 .orElseThrow(() -> new IllegalArgumentException("Lecture not found"));
         LectureDetail lectureDetail = lectureDetailRepository.findByLectureUdemyId(lectureId)
                 .orElseThrow(() -> new IllegalArgumentException("Lecture detail not found"));
+        LectureTag lectureTag = lectureTagRepository.findByLectureUdemyId(lectureId)
+                .orElseThrow(() -> new IllegalArgumentException("Lecture tag not found"));
 
-        return LectureConverter.toLectureDetailDto(lectureUdemy, lectureDetail);
+        return LectureConverter.toLectureDetailDto(lectureUdemy, lectureDetail, lectureTag);
     }
 
     /**
