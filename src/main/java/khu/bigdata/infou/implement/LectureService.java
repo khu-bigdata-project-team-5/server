@@ -120,7 +120,7 @@ public class LectureService {
      */
     public LectureResponseDTO.OtherStudentsDto findOtherStudents() {
 
-        List<PlatformStudent> platformStudents = platformStudentRepository.findAllWithUdemyUserId();
+        List<PlatformStudent> platformStudents = platformStudentRepository.findTop1000ByUdemyUserIdIsNotNull();
 
         // 가져온 데이터를 List로 변환
         List<PlatformStudent> studentList = platformStudents.stream()
