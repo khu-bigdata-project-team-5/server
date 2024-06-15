@@ -113,10 +113,10 @@ $ git push origin feature/your-feature
 
 ### Issue & Bug Report
 
-Issues 탭에서 새로운 이슈를 등록합니다.
+1. Issues 탭에서 새로운 이슈를 등록합니다.
 
-추가 기능 구현에 대한 이슈는 스크린 구현 이슈로, 버그 제보나 트러블 슈팅에 관한 이슈는 트러블 슈팅 이슈로 생성합니다.
+2. 추가 기능 구현에 대한 이슈는 스크린 구현 이슈로, 버그 제보나 트러블 슈팅에 관한 이슈는 트러블 슈팅 이슈로 생성합니다.
 
-![img/issue-1.png](img/issue-1.png)
+3. 각 이슈 타입에 맞는 템플릿을 따라 작성합니다.
 
-각 이슈 타입에 맞는 템플릿을 따라 작성합니다.
+![image/pr](https://github.com/khu-bigdata-project-team-5/server/assets/87745916/d3808332-371b-4538-a921-6f2071220cde)
